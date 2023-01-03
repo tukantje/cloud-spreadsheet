@@ -69,8 +69,7 @@ function parseMultiplicationExpression(expression: string): number {
   const numbers = numbersString.map((numberString) => {
     if (numberString[0] === "(") {
       const expr = numberString.substr(1, numberString.length - 2);
-      // recursive call to the main function
-      return parsePlusExpression(expr);
+      return parseDivisionExpression(expr);
     }
     return +numberString;
   });
@@ -91,11 +90,10 @@ function parseDivisionExpression(expression: string) {
     }
     return +numberString;
   });
-  const initialValue = 1.0;
-  const result = numbers.reduce(
-    (accumulator, current) => accumulator * current,
-    initialValue
-  );
+  const initialValue = numbers[0];
+  const result = numbers
+    .slice(1)
+    .reduce((accumulator, current) => accumulator / current, initialValue);
   return result;
 }
 
