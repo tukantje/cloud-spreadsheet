@@ -1,0 +1,52 @@
+.title {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.identifier {
+  background: #EFEFEF;
+}
+
+.identifier:first-child th:first-child {
+  background-color: #FFFFFF;
+}
+
+.identifier:first-child th:nth-child(2) {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+.identifier:first-child th:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.sheet {
+  border-collapse: separate;
+  text-indent: initial;
+  border-collapse: separate;
+  border-spacing: 0 1rem;
+}
+
+.sheet tbody tr th:first-child {
+  background: #EFEFEF;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.sheet tbody tr td {
+  background: #FAFAFA;
+}
+
+.sheet tbody tr td:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.row {
+}

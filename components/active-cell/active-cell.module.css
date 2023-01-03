@@ -1,0 +1,18 @@
+.cellInput {
+  --padding: 0.25rem;
+  
+  font-size: inherit;
+  padding: var(--padding);
+
+  width: 10rem;
+  height: 3rem;
+}
+
+.cellInput:focus {
+  --outline-size: calc(var(--padding) / 2.5);
+  --outline-offset: calc(-1 * var(--outline-size));
+
+  outline: var(--outline-size) solid blue;
+  outline-offset: var(--outline-offset);
+  background: #ffa;
+}

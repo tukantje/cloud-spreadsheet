@@ -1,0 +1,9 @@
+.inactiveCell {
+  cursor: pointer;
+}
+
+.editIcon {
+  float: right;
+  margin-right: 1rem;
+  cursor: pointer;
+}
