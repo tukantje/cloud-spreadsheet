@@ -1,4 +1,5 @@
 import { useCells } from "../use-cells";
+import { ICell } from "../use-sheet";
 
 interface IUseCellParams {
   row: number;
@@ -67,11 +68,7 @@ function parseMinusExpression(expression: string): number {
 function parseMultiplicationExpression(expression: string): number {
   const numbersString = split(expression, "*");
   const numbers = numbersString.map((numberString) => {
-    if (numberString[0] === "(") {
-      const expr = numberString.substr(1, numberString.length - 2);
-      return parseDivisionExpression(expr);
-    }
-    return +numberString;
+    return parseDivisionExpression(numberString);
   });
   const initialValue = 1.0;
   const result = numbers.reduce(
@@ -97,8 +94,21 @@ function parseDivisionExpression(expression: string) {
   return result;
 }
 
-function parseFormula(value: string) {
-  const expression = value.slice(1);
+function getCellColumnIndex(cell: string) {
+  return cell.charCodeAt(0) - 65;
+}
+
+function parseFormula(value: string, cells: ICell[][]): string {
+  const referenceRegex = /([A-Z][0-9]+)/g;
+  let expression = isFormula(value) ? value.slice(1) : value;
+  expression = expression.replace(referenceRegex, (match) => {
+    const columnIndex = getCellColumnIndex(match);
+    const rowIndex: number = +match.slice(1);
+
+    const cell = cells[rowIndex]?.[columnIndex];
+
+    return parseFormula(cell?.value, cells);
+  });
 
   return String(parsePlusExpression(expression));
 }
@@ -109,7 +119,7 @@ export function useCell({ row, column }: IUseCellParams) {
 
   if (isFormula(cellValue)) {
     return {
-      result: parseFormula(cellValue),
+      result: parseFormula(cellValue, cells),
       value: cellValue,
     };
   }
