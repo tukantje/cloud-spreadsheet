@@ -107,7 +107,7 @@ function parseFormula(value: string, cells: ICell[][]): string {
 
     const cell = cells[rowIndex]?.[columnIndex];
 
-    return parseFormula(cell?.value, cells);
+    return parseFormula(cell?.value ?? "", cells);
   });
 
   return String(parsePlusExpression(expression));
